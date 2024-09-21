@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ScreenSystem
+namespace UnityScreenSystem
 {
 
     /// <summary>
@@ -20,7 +20,7 @@ namespace ScreenSystem
         [Header("Screens")] 
         [SerializeReference] private Transform screenParent;
         [Header("Transitions")]
-        [SerializeReference] private ScreenTransition defaultTransition;
+        [SerializeReference] private Transition defaultTransition;
         [SerializeReference] private Transform transitionParent;
         [Header("Scene")]
         [SerializeReference] private Transform sceneParent;
@@ -99,14 +99,14 @@ namespace ScreenSystem
         /// <param name="pOpenOverExisting">Should this screen be opened on top of the existing screen, or replace it?</param>
         /// <param name="pTransition">(Optional) How should this screen be transitioned to? (uses defaultTransition if null)</param>
         /// <param name="onComplete">(Optional) Callback for once this is complete.</param>
-        public static async Task OpenScreen(Screen pScreenToOpen, bool pOpenOverExisting = false, ScreenTransition pTransition = null, Action onComplete = null)
+        public static async Task OpenScreen(Screen pScreenToOpen, bool pOpenOverExisting = false, Transition pTransition = null, Action onComplete = null)
         {
             // Sanitize Inputs
             if (pScreenToOpen == null) return;
             if (pTransition == null) pTransition = _instance.defaultTransition;
             
             // Instantiate transition
-            ScreenTransition transition = Instantiate(pTransition, _instance.transitionParent);
+            Transition transition = Instantiate(pTransition, _instance.transitionParent);
 
             // Handle edge cases
             if (CurrentScreen != null && !pOpenOverExisting)
@@ -139,14 +139,14 @@ namespace ScreenSystem
         /// </summary>
         /// <param name="pTransition">(Optional) How should this screen be transitioned from? (uses defaultTransition if null)</param>
         /// <param name="onComplete">(Optional) Callback for once this is complete.</param>
-        public static async Task CloseScreen(ScreenTransition pTransition = null, Action onComplete = null)
+        public static async Task CloseScreen(Transition pTransition = null, Action onComplete = null)
         {
             // Sanitize Inputs
             if (CurrentScreen == null) return;
             if (pTransition == null) pTransition = _instance.defaultTransition;
 
             // Instantiate transition
-            ScreenTransition transition = Instantiate(pTransition, _instance.transitionParent);
+            Transition transition = Instantiate(pTransition, _instance.transitionParent);
             
             // Close current screen and open last one
             Screen screenClosing = _screenStack.Pop();

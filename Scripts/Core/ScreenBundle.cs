@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ScreenSystem
+namespace UnityScreenSystem
 {
     
     /// <summary>

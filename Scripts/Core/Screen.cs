@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using WebGame.Application;
 
-namespace ScreenSystem
+namespace UnityScreenSystem
 {
     
     [RequireComponent(typeof(CanvasGroup))]
